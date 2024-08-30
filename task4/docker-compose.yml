@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./back-end  # Path to the back-end directory
+      dockerfile: Dockerfile  # Dockerfile inside the back-end directory
+    image: backend-image:latest
+    ports:
+      - "5252:5252"  # Exposing the back-end service on port 5252
+
+  frontend:
+    build:
+      context: ./front-end  # Path to the front-end directory
+      dockerfile: Dockerfile  # Dockerfile inside the front-end directory
+    image: frontend-image:latest
+    ports:
+      - "9000:9000"  # Exposing the front-end service on port 9000
+    depends_on:
+      - backend  # Ensures the backend service starts before the frontend
